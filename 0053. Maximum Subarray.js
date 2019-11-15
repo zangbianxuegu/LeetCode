@@ -32,3 +32,21 @@ var maxSubArray = function(nums) {
 }
 // Runtime: 68 ms, faster than 24.97% of JavaScript online submissions for Maximum Subarray.
 // Memory Usage: 35.6 MB, less than 14.81% of JavaScript online submissions for Maximum Subarray.
+
+
+// 2) kadane
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var maxSubArray = function(nums) {
+  let sum = nums[0]
+  let max = nums[0]
+  for (let i = 1; i < nums.length; i++) {
+    max = Math.max(max + nums[i], nums[i])
+    sum = Math.max(sum, max)
+  }
+  return sum
+}
+// Runtime: 60 ms, faster than 65.60% of JavaScript online submissions for Maximum Subarray.
+// Memory Usage: 35.3 MB, less than 68.52% of JavaScript online submissions for Maximum Subarray.
