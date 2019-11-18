@@ -28,8 +28,8 @@
  * @return {boolean}
  */
 var isSubsequence = function(s, t) {
-  s = s.split('').join('')
-  t = t.split('').join('')
+  s = s.split('')
+  t = t.split('')
   let sLen = s.length
   let tLen = t.length
   let arr = new Array(sLen).fill(0)
@@ -48,8 +48,8 @@ var isSubsequence = function(s, t) {
   }
   return true
 }
-// Runtime: 200 ms, faster than 5.22% of JavaScript online submissions for Is Subsequence.
-// Memory Usage: 69 MB, less than 33.33% of JavaScript online submissions for Is Subsequence.
+// Runtime: 128 ms, faster than 5.78% of JavaScript online submissions for Is Subsequence.
+// Memory Usage: 56 MB, less than 33.33% of JavaScript online submissions for Is Subsequence.
 
 
 // 2) 使用 indexOf
