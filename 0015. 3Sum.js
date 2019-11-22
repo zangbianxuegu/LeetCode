@@ -15,7 +15,7 @@
 // ]
 
 
-// 1) 三指针
+// 1) 双指针
 /**
  * @param {number[]} nums
  * @return {number[][]}
