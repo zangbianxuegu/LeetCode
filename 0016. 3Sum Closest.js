@@ -7,7 +7,7 @@
 // The sum that is closest to the target is 2.(-1 + 2 + 1 = 2).
 
 
-// 三指针
+// 双指针
 // 参考 0015
 var threeSumClosest = function (nums, target) {
   let res = Infinity
