@@ -54,3 +54,19 @@ var singleNumber = function(nums) {
 }
 // Runtime: 60 ms, faster than 74.64% of JavaScript online submissions for Single Number.
 // Memory Usage: 38.7 MB, less than 9.61% of JavaScript online submissions for Single Number.
+
+
+// 3) 位操作：异或
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var singleNumber = function(nums) {
+  let c = 0
+  for (let i = 0; i < nums.length; i++) {
+    c ^= nums[i]
+  }
+  return c
+}
+// Runtime: 56 ms, faster than 87.89% of JavaScript online submissions for Single Number.
+// Memory Usage: 35.4 MB, less than 78.85% of JavaScript online submissions for Single Number.
