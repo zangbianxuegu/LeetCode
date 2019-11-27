@@ -32,3 +32,37 @@ var findDuplicate = function(nums) {
 }
 // Runtime: 76 ms, faster than 29.86% of JavaScript online submissions for Find the Duplicate Number.
 // Memory Usage: 36.4 MB, less than 28.57% of JavaScript online submissions for Find the Duplicate Number.
+
+
+// 2) Cycle detection - Floyd's Tortoise and Hare
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+var findDuplicate = function(nums) {
+  const getIntersect = (head) => {
+    let slow = head
+    let fast = head
+    while (slow && fast) {
+      slow = nums[slow]
+      fast = nums[nums[fast]]
+      if (slow === fast) {
+        return fast
+      }
+    }
+    return null
+  }
+  const intersect = getIntersect(nums[0])
+  if (!intersect) {
+    return null
+  }
+  let slow = nums[0]
+  let fast = intersect
+  while (slow !== fast) {
+    slow = nums[slow]
+    fast = nums[fast]
+  }
+  return fast
+}
+// Runtime: 64 ms, faster than 48.60% of JavaScript online submissions for Find the Duplicate Number.
+// Memory Usage: 35.6 MB, less than 71.43% of JavaScript online submissions for Find the Duplicate Number.
