@@ -17,6 +17,7 @@
 // the decimal part is truncated, 2 is returned.
 
 
+// 1) cheating
 /**
  * @param {number} x
  * @return {number}
@@ -26,3 +27,38 @@ var mySqrt = function (x) {
 }
 // Runtime: 68 ms, faster than 87.57 % of JavaScript online submissions for Sqrt(x).
 // Memory Usage: 35.7 MB, less than 69.44 % of JavaScript online submissions for Sqrt(x).
+
+
+// 2) 循环
+var mySqrt = (x) => {
+  for (let i = 0; i <= x; i++) {
+    if (i * i === x) {
+      return i
+    } else if (i * i > x) {
+      return i - 1
+    }
+  }
+  return x
+}
+// Runtime: 116 ms, faster than 7.86 % of JavaScript online submissions for Sqrt(x).
+// Memory Usage: 35.6 MB, less than 72.22 % of JavaScript online submissions for Sqrt(x).
+
+
+// 3) 二分查找
+var mySqrt = (x) => {
+  let l = 1
+  let r = x
+  while (l <= r) {
+    let m = ~~((l + r) / 2)
+    if (m * m === x) {
+      return m
+    } else if (m * m < x) {
+      l = m + 1
+    } else {
+      r = m - 1
+    }
+  }
+  return r
+}
+// Runtime: 68 ms, faster than 87.57 % of JavaScript online submissions for Sqrt(x).
+// Memory Usage: 35.3 MB, less than 100.00 % of JavaScript online submissions for Sqrt(x).
