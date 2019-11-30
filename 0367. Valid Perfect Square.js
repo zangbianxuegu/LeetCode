@@ -42,7 +42,7 @@ var isPerfectSquare = function (num) {
 // https://en.wikipedia.org/wiki/Integer_square_root
 const isPerfectSquare = (num) => {
   let r = num
-  while (r * r > num) {
+  while (r * r > num) 
     r = ((r + num / r) / 2) | 0
   }
   return r * r === num
