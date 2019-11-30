@@ -62,3 +62,16 @@ var mySqrt = (x) => {
 }
 // Runtime: 68 ms, faster than 87.57 % of JavaScript online submissions for Sqrt(x).
 // Memory Usage: 35.3 MB, less than 100.00 % of JavaScript online submissions for Sqrt(x).
+
+
+// 4) Integer square root
+// https://en.wikipedia.org/wiki/Integer_square_root
+const mySqrt = (x) => {
+  let r = x
+  while (r * r > x) {
+    r = ((r + x / r) / 2) | 0
+  }
+  return r
+}
+// Runtime: 76 ms, faster than 58.83 % of JavaScript online submissions for Sqrt(x).
+// Memory Usage: 35.9 MB, less than 19.44 % of JavaScript online submissions for Sqrt(x).
