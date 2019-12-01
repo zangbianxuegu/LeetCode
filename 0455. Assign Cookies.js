@@ -66,3 +66,23 @@ const findContentChildren = (g, s) => {
 }
 // Runtime: 96 ms, faster than 39.76 % of JavaScript online submissions for Assign Cookies.
 // Memory Usage: 37.7 MB, less than 100.00 % of JavaScript online submissions for Assign Cookies.
+
+
+// 3) 贪心
+const findContentChildren = (g, s) => {
+  g = g.sort((a, b) => a - b)
+  s = s.sort((a, b) => a - b)
+  let i = 0
+  let j = 0
+  let count = 0
+  while (i < s.length) {
+    if (s[i] >= g[j]) {
+      count++
+      j++
+    }
+    i++
+  }
+  return count
+}
+// Runtime: 60 ms, faster than 100.00 % of JavaScript online submissions for Assign Cookies.
+// Memory Usage: 37.5 MB, less than 100.00 % of JavaScript online submissions for Assign Cookies.
