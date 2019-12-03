@@ -88,3 +88,33 @@ const canCompleteCircuit = (gas, cost) => {
 // console.log(canCompleteCircuit([5], [4]));
 // Runtime: 96 ms, faster than 37.14% of JavaScript online submissions for Gas Station.
 // Memory Usage: 34.9 MB, less than 33.33% of JavaScript online submissions for Gas Station.
+
+
+// 2)
+// gas 总数小于 cost 总数，不可能到达终点
+// 如果从位置 A 开始不能达到位置 B，则 A 到 B 之间的任何位置不能达到 B，从 B + 1 位置开始寻求路径
+/**
+ * @param {number[]} gas
+ * @param {number[]} cost
+ * @return {number}
+ */
+const canCompleteCircuit = (gas, cost) => {
+  let sGas = gas.reduce((sum, item) => sum + item, 0)
+  let sCost = cost.reduce((sum, item) => sum + item, 0)
+  if (sGas < sCost) {
+    return -1
+  }
+  let n = gas.length
+  let tank = 0
+  let l = 0
+  for (let i = 0; i < n; i++) {
+    tank += gas[i] - cost[i]
+    if (tank < 0) {
+      tank = 0
+      l = i + 1
+    }
+  }
+  return l
+}
+// Runtime: 56 ms, faster than 78.44% of JavaScript online submissions for Gas Station.
+// Memory Usage: 34 MB, less than 100.00% of JavaScript online submissions for Gas Station.
