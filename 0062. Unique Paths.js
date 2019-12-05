@@ -36,3 +36,44 @@ const uniquePaths = (m, n) => {
   }
   return uniquePaths(m - 1, n) + uniquePaths(m, n - 1)
 }
+
+
+// 2) 迭代
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+const uniquePaths = (m, n) => {
+  let arr = Array(m)
+  for (let i = 0; i < m; i++) {
+    arr[i] = Array(n).fill(1)
+  }
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      arr[i][j] = arr[i - 1][j] + arr[i][j - 1]
+    }
+  }
+  return arr[m - 1][n - 1]
+}
+// Runtime: 56 ms, faster than 65.15 % of JavaScript online submissions for Unique Paths.
+// Memory Usage: 33.8 MB, less than 81.82 % of JavaScript online submissions for Unique Paths.
+
+
+// 3) 迭代，减小空间复杂度
+/**
+ * @param {number} m
+ * @param {number} n
+ * @return {number}
+ */
+const uniquePaths = (m, n) => {
+  let arr = Array(n).fill(1)
+  for (let i = 1; i < m; i++) {
+    for (let j = 1; j < n; j++) {
+      arr[j] += arr[j - 1]
+    }
+  }
+  return arr[n - 1]
+}
+// Runtime: 48 ms, faster than 94.76 % of JavaScript online submissions for Unique Paths.
+// Memory Usage: 33.6 MB, less than 100.00 % of JavaScript online submissions for Unique Paths.
