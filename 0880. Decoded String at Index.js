@@ -57,3 +57,38 @@ const decodeAtIndex = (S, K) => {
   return res[K - 1]
 }
 
+
+// 2)
+// N：遍历编码字符串 S，获取大于 K 位置的解码长度
+// i：遍历的次数，反向递减 i
+// 如果 s = S[i] 是数字，那么 N / d 是重复的部分，K % N 是最终的字符
+// 如果 s = S[i] 是字符，如果 K % N === 0，返回 s
+/**
+ * @param {string} S
+ * @param {number} K
+ * @return {string}
+ */
+const decodeAtIndex = (S, K) => {
+  let N = 0
+  let i = 0
+  for (; N < K; i++) {
+    let s = S[i]
+    if (String(Number(s)).length > 1) {
+      N += 1
+    } else {
+      N *= Number(s)
+    }
+  }
+  while (i--) {
+    let s = S[i]
+    if (String(Number(s)).length === 1) {
+      N /= Number(s)
+      K %= N
+    } else if (K % N-- === 0) {
+      return s
+    }
+  }
+}
+// Runtime: 52 ms, faster than 78.13% of JavaScript online submissions for Decoded String at Index.
+// Memory Usage: 33.8 MB, less than 100.00% of JavaScript online submissions for Decoded String at Index.
+
