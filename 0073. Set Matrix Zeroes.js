@@ -73,3 +73,42 @@ const setZeroes = (matrix) => {
 }
 // Runtime: 80 ms, faster than 82.44% of JavaScript online submissions for Set Matrix Zeroes.
 // Memory Usage: 37 MB, less than 100.00% of JavaScript online submissions for Set Matrix Zeroes.
+
+
+// 2) 
+// https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution
+// top-down 遍历，第一行每个元素存储当前列是否为 0，第一列每个元素存储当前行是否为 0，bottom-up 遍历，根据当前元素的第一行和第一列判断当前元素是否为 0。
+// [0, 0] 需要特殊考虑
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+const setZeroes = (matrix) => {
+  if (matrix && matrix.length) {
+    let m = matrix.length
+    let n = matrix[0].length
+    let col0 = 1
+    for (let i = 0; i < m; i++) {
+      if (matrix[i][0] === 0) {
+        col0 = 0
+      }
+      for (let j = 1; j < n; j++) {
+        if (matrix[i][j] === 0) {
+          matrix[i][0] = matrix[0][j] = 0
+        }
+      }
+    }      
+    for (let i = m - 1; i >= 0; i--) {
+      for (let j = n - 1; j >= 1; j--) {
+        if (matrix[i][0] === 0 || matrix[0][j] === 0) {
+          matrix[i][j] = 0
+        }
+      }
+      if (col0 === 0) {
+        matrix[i][0] = 0
+      }
+    }
+  }
+}
+// Runtime: 108 ms, faster than 7.22% of JavaScript online submissions for Set Matrix Zeroes.
+// Memory Usage: 37.5 MB, less than 40.00% of JavaScript online submissions for Set Matrix Zeroes.
