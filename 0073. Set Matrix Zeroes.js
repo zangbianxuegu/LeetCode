@@ -143,3 +143,37 @@ const setZeroes = (matrix) => {
 }
 // Runtime: 108 ms, faster than 7.22% of JavaScript online submissions for Set Matrix Zeroes.
 // Memory Usage: 37.5 MB, less than 40.00% of JavaScript online submissions for Set Matrix Zeroes.
+
+
+// 4) 奇技淫巧
+// 严格来说，有 -0
+// https://leetcode.com/problems/set-matrix-zeroes/discuss/26047/Quiet-simple-answer-'hacking'-with-javascript
+// 0 === -0          true
+// Object.is(-0, 0)  false
+// 0 && 0     0
+// 0 && -0    0
+// -0 && 0   -0
+// -0 && -0  -0
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+const setZeroes = matrix => {
+  let m = matrix.length
+  let n = matrix[0].length
+  for (let i = 0; i < m; i++) {
+    for (let j = 0; j < n; j++) {
+      if (!Object.is(matrix[i][j], 0)) {
+        continue
+      }
+      for (let x = 0; x < m; x++) {
+        matrix[x][j] = matrix[x][j] && -0
+      }
+      for (let y = 0; y < n; y++) {
+        matrix[i][y] = matrix[i][y] && -0
+      }
+    }
+  }
+}
+// Runtime: 76 ms, faster than 92.83% of JavaScript online submissions for Set Matrix Zeroes.
+// Memory Usage: 37.9 MB, less than 10.00% of JavaScript online submissions for Set Matrix Zeroes.
