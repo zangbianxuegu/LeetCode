@@ -35,7 +35,7 @@
 // }
 
 
-// 1) 
+// 1) first
 /**
  * @param {number[]} nums
  * @return {number}
@@ -61,3 +61,23 @@ const removeDuplicates = (nums) => {
 }
 // Runtime: 68 ms, faster than 72.33 % of JavaScript online submissions for Remove Duplicates from Sorted Array II.
 // Memory Usage: 35.7 MB, less than 100.00 % of JavaScript online submissions for Remove Duplicates from Sorted Array II.
+
+
+// 2) 
+// https://leetcode.com/problems/remove-duplicates-from-sorted-array-ii/discuss/27976/3-6-easy-lines-C%2B%2B-Java-Python-Ruby
+// 这写法真让人感觉自己宛如智障
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+const removeDuplicates = (nums) => {
+  let i = 0
+  for (n of nums) {
+    if (i < 2 || n > nums[i - 2]) {
+      nums[i++] = n
+    }
+  }
+  return i
+}
+// Runtime: 60 ms, faster than 94.83 % of JavaScript online submissions for Remove Duplicates from Sorted Array II.
+// Memory Usage: 35.6 MB, less than 100.00 % of JavaScript online submissions for Remove Duplicates from Sorted Array II.
