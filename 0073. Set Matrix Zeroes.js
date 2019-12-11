@@ -36,7 +36,7 @@
 // Could you devise a constant space solution?
 
 
-// 1) 
+// 1) 空间复杂度 O(n)
 /**
  * @param {number[][]} matrix
  * @return {void} Do not return anything, modify matrix in-place instead.
@@ -75,7 +75,38 @@ const setZeroes = (matrix) => {
 // Memory Usage: 37 MB, less than 100.00% of JavaScript online submissions for Set Matrix Zeroes.
 
 
-// 2) 
+// 2) 空间复杂度 O(m+n)
+/**
+ * @param {number[][]} matrix
+ * @return {void} Do not return anything, modify matrix in-place instead.
+ */
+const setZeroes = (matrix) => {
+  if (matrix && matrix.length) {
+    let m = matrix.length
+    let n = matrix[0].length
+    let rows = new Set()
+    let cols = new Set()
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        if (matrix[i][j] === 0) {
+          rows.add(i)
+          cols.add(j)
+        }
+      }
+    }
+    for (let i = 0; i < m; i++) {
+      for (let j = 0; j < n; j++) {
+        if (rows.has(i) || cols.has(j)) {
+          matrix[i][j] = 0
+        }
+      }
+    }
+  }
+  return matrix
+}
+
+
+// 3) 空间复杂度 O(1) 
 // https://leetcode.com/problems/set-matrix-zeroes/discuss/26014/Any-shorter-O(1)-space-solution
 // top-down 遍历，第一行每个元素存储当前列是否为 0，第一列每个元素存储当前行是否为 0，bottom-up 遍历，根据当前元素的第一行和第一列判断当前元素是否为 0。
 // [0, 0] 需要特殊考虑
