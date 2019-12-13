@@ -26,7 +26,8 @@
 // Output: false
 
 
-// 1) 二分查找
+// 1) 二分查找，时间复杂度 O(log(m * n))
+// 二分列，定位目标所在的行，二分行，定位目标是否存在
 /**
  * @param {number[][]} matrix
  * @param {number} target
@@ -80,3 +81,34 @@ const searchMatrix = (matrix, target) => {
 }
 // Runtime: 60 ms, faster than 42.57% of JavaScript online submissions for Search a 2D Matrix.
 // Memory Usage: 34.3 MB, less than 100.00% of JavaScript online submissions for Search a 2D Matrix.
+
+
+// 2) 二分查找，时间复杂度 O(log(m * n))
+// https://leetcode.com/problems/search-a-2d-matrix/discuss/26220/Don't-treat-it-as-a-2D-matrix-just-treat-it-as-a-sorted-list
+// 将整个二维数组当成一个排序的一维数组，二分
+/**
+ * @param {number[][]} matrix
+ * @param {number} target
+ * @return {boolean}
+ */
+const searchMatrix = (matrix, target) => {
+  if (!matrix || !matrix.length || !matrix[0].length) {
+    return false
+  }
+  let m = matrix.length
+  let n = matrix[0].length
+  let l = 0
+  let r = m * n - 1
+
+  while (l !== r) {
+    let mid = (l + r - 1) >> 1
+    if (target > matrix[~~(mid / n)][mid % n]) {
+      l = mid + 1
+    } else {
+      r = mid
+    }
+  }
+  return matrix[~~(r / n)][r % n] === target
+}
+// Runtime: 60 ms, faster than 42.57% of JavaScript online submissions for Search a 2D Matrix.
+// Memory Usage: 34.7 MB, less than 50.00% of JavaScript online submissions for Search a 2D Matrix.
