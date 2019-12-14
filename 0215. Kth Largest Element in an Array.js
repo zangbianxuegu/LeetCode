@@ -19,7 +19,7 @@
  * @param {number} k
  * @return {number}
  */
-const findKthLargest = (nums, k) => {
+const findKthLargest1 = (nums, k) => {
   if (nums && nums.length && k) {
     nums = nums.sort((a, b) => b - a)
     return nums[k - 1]
@@ -59,3 +59,5 @@ const findKthLargest = (nums, k) => {
 }
 // Runtime: 304 ms, faster than 5.09% of JavaScript online submissions for Kth Largest Element in an Array.
 // Memory Usage: 41.5 MB, less than 10.00% of JavaScript online submissions for Kth Largest Element in an Array.
+
+export default findKthLargest
