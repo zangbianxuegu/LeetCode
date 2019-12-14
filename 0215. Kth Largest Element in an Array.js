@@ -27,3 +27,35 @@ const findKthLargest = (nums, k) => {
 }
 // Runtime: 72 ms, faster than 64.87% of JavaScript online submissions for Kth Largest Element in an Array.
 // Memory Usage: 36 MB, less than 10.00% of JavaScript online submissions for Kth Largest Element in an Array.
+
+
+// 2) quick sort
+/**
+ * @param {number[]} nums
+ * @param {number} k
+ * @return {number}
+ */
+const findKthLargest = (nums, k) => {
+  const swap = (i, j) => ([nums[i], nums[j]] = [nums[j], nums[i]])
+  const quickSelect = (l, r, k) => {
+    let p = l
+    for (let j = l; j < r; j++) {
+      if (nums[j] <= nums[r]) {
+        swap(p, j)
+        p++
+      }
+    }
+    swap(p, r)
+    const count = r - p + 1
+    if (count > k) {
+      return quickSelect(p + 1, r, k)
+    } else if (count < k) {
+      return quickSelect(l, p - 1, k - count)
+    } else {
+      return nums[p]
+    }
+  }
+  return quickSelect(0, nums.length - 1, k)
+}
+// Runtime: 304 ms, faster than 5.09% of JavaScript online submissions for Kth Largest Element in an Array.
+// Memory Usage: 41.5 MB, less than 10.00% of JavaScript online submissions for Kth Largest Element in an Array.
