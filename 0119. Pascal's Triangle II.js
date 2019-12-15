@@ -38,3 +38,24 @@ const getRow = (rowIndex) => {
 }
 // Runtime: 52 ms, faster than 82.87 % of JavaScript online submissions for Pascal's Triangle II.
 // Memory Usage: 33.8 MB, less than 70.00 % of JavaScript online submissions for Pascal's Triangle II.
+
+
+// 2) 更简洁、更少的空间
+/**
+ * @param {number} rowIndex
+ * @return {number[]}
+ */
+const getRow = (rowIndex) => {
+  let res = Array(rowIndex + 1).fill(0)
+  res[0] = 1
+  for (let i = 1; i < rowIndex + 1; i++) {
+    for (let j = i; j > 0; j--) {
+      res[j] += res[j - 1]
+    }
+  }
+  return res
+}
+// Runtime: 52 ms, faster than 82.87 % of JavaScript online submissions for Pascal's Triangle II.
+// Memory Usage: 33.8 MB, less than 70.00 % of JavaScript online submissions for Pascal's Triangle II.
+
+
