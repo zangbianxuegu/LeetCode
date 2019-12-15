@@ -13,7 +13,10 @@
 // Output: [1, 2]
 
 
-// 1) Map
+// 1) O(n^2)
+
+
+// 2) Map
 // 时间复杂度 O(n)，空间复杂度 O(n)
 /**
  * @param {number[]} nums
@@ -37,3 +40,48 @@ const majorityElement = (nums) => {
 }
 // Runtime: 68 ms, faster than 37.98% of JavaScript online submissions for Majority Element II.
 // Memory Usage: 37.3 MB, less than 14.29 % of JavaScript online submissions for Majority Element II.
+
+
+// 3) Boyer-Moore Vote algorithm
+// 时间复杂度 O(n)，空间复杂度 O(1)
+// similar to 0169
+// 大于 ⌊ n/3 ⌋，分析问题发现，最多出现两个符合条件的元素。设置两个候选。
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+const majorityElement = (nums) => {
+  let candidate1 = -1
+  let candidate2 = -1
+  let count1 = 0
+  let count2 = 0
+  let res = []
+  for (num of nums) {
+    if (count1 === 0 && num !== candidate2) {
+      candidate1 = num
+    } else if (count2 === 0 && num !== candidate1) {
+      candidate2 = num
+    }
+    if (num === candidate1) {
+      count1++
+    } else if (num === candidate2) {
+      count2++
+    } else {
+      count1--
+      count2--
+    }
+  }
+  const counts = (arr, value) => {
+    return arr.reduce((a, v) =>
+      v === value ? a + 1 : a + 0, 0
+    )
+  }
+  for (let candidate of [candidate1, candidate2]) {
+    if (counts(nums, candidate) > nums.length / 3) {
+      res.push(candidate)
+    }
+  }
+  return res
+}
+// Runtime: 64 ms, faster than 55.37% of JavaScript online submissions for Majority Element II.
+// Memory Usage: 37 MB, less than 14.29 % of JavaScript online submissions for Majority Element II.
