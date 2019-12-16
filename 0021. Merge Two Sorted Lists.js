@@ -48,3 +48,38 @@ const mergeTwoLists = (l1, l2) => {
 }
 // Runtime: 72 ms, faster than 26.08% of JavaScript online submissions for Merge Two Sorted Lists.
 // Memory Usage: 35.5 MB, less than 89.74% of JavaScript online submissions for Merge Two Sorted Lists.
+
+
+// 2) 递归
+// 注意在递归调用过程中，声明了多个 l，最终在出栈过程中返回了第一个 l
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+const mergeTwoLists = (l1, l2) => {
+  if (!l1) {
+    return l2
+  } else if (!l2) {
+    return l1
+  }
+  let l
+  if (l1.val < l2.val) {
+    l = l1
+    l.next = mergeTwoLists(l1.next, l2)
+  } else {
+    l = l2
+    l.next = mergeTwoLists(l1, l2.next)
+  }
+  return l
+}
+// Runtime: 76 ms, faster than 16.64% of JavaScript online submissions for Merge Two Sorted Lists.
+// Memory Usage: 35.5 MB, less than 89.74% of JavaScript online submissions for Merge Two Sorted Lists.
+
