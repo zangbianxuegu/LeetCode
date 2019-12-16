@@ -83,3 +83,25 @@ const mergeTwoLists = (l1, l2) => {
 // Runtime: 76 ms, faster than 16.64% of JavaScript online submissions for Merge Two Sorted Lists.
 // Memory Usage: 35.5 MB, less than 89.74% of JavaScript online submissions for Merge Two Sorted Lists.
 
+// Test case:
+// let l1 = {
+//   val: 1,
+//   next: {
+//     val: 2,
+//     next: {
+//       val: 3,
+//       next: null
+//     }
+//   }
+// }
+// let l2 = {
+//   val: 1,
+//   next: {
+//     val: 2,
+//     next: {
+//       val: 4,
+//       next: null
+//     }
+//   }
+// }
+// console.log(mergeTwoLists(l1, l2));
