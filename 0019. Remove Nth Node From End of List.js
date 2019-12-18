@@ -15,7 +15,7 @@
 // Could you do this in one pass ?
 
 
-// 1) 
+// 1) two pointers
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
@@ -36,25 +36,25 @@ const removeNthFromEnd = (head, n) => {
   if (!head) {
     return null
   }
-  let node = new ListNode(null)
-  node.next = head
-  let pre = node
-  let cur = node
-  while (n-- > 0) {
-    pre = pre.next
-    if (!pre) {
+  let preHead = new ListNode(null)
+  preHead.next = head
+  let fast = preHead
+  let slow = preHead
+  while (n--) {
+    fast = fast.next
+    if (!fast) {
       return head
     }
   }
-  while (pre.next) {
-    pre = pre.next
-    cur = cur.next
+  while (fast.next) {
+    fast = fast.next
+    slow = slow.next
   }
-  cur.next = cur.next.next
-  return node.next
+  slow.next = slow.next.next
+  return preHead.next
 }
-// Runtime: 64 ms, faster than 37.39 % of JavaScript online submissions for Remove Nth Node From End of List.
-// Memory Usage: 34.1 MB, less than 54.55 % of JavaScript online submissions for Remove Nth Node From End of List.
+// Runtime: 60 ms, faster than 62.50% of JavaScript online submissions for Remove Nth Node From End of List.
+// Memory Usage: 34 MB, less than 77.27% of JavaScript online submissions for Remove Nth Node From End of List.
 
 // Test case:
 // let head = {
