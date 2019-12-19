@@ -53,7 +53,7 @@ const swapPairs = (head) => {
 //               ------------>    
 // ⑤ cur = cur.next.next
 //                    cur
-//    null      2  ->  1  ->  3  ->  4  ->  null
+//    null  ->  2  ->  1  ->  3  ->  4  ->  null
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
