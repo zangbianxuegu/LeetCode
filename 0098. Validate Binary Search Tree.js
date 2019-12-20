@@ -61,4 +61,27 @@ const isValidBST = (root) => {
 // Runtime: 56 ms, faster than 97.00% of JavaScript online submissions for Validate Binary Search Tree.
 // Memory Usage: 37.1 MB, less than 100.00% of JavaScript online submissions for Validate Binary Search Tree.
 
+// Test case:
+// let root = {
+//   val: 10,
+//   left: {
+//     val: 5,
+//     left: null,
+//     right: null
+//   },
+//   right: {
+//     val: 15,
+//     left: {
+//       val: 6,
+//       left: null,
+//       right: null
+//     },
+//     right: {
+//       val: 20,
+//       left: null,
+//       right: null
+//     }
+//   }
+// }
+// console.log(isValidBST(root))
 
