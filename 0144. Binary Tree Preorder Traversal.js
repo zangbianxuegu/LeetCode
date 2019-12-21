@@ -49,3 +49,78 @@ const preorderTraversal = (root) => {
 // Memory Usage: 33.8 MB, less than 62.07 % of JavaScript online submissions for Binary Tree Preorder Traversal.
 
 
+// 2) 迭代
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+function TreeNode(val) {
+  this.val = val
+  this.left = null
+  this.right = null
+}
+const preorderTraversal = (root) => {
+  let nodes = []
+  let stack = []
+  while (root || stack.length) {
+    while (root) {
+      nodes.push(root.val)
+      stack.push(root) // 存储当前节点
+      root = root.left
+    }
+    let top = stack.pop()
+    root = top  // 寻找到存储的节点
+    root = root.right // 寻找到存储的节点的右节点
+  }
+  return nodes
+}
+// Runtime: 60 ms, faster than 28.66 % of JavaScript online submissions for Binary Tree Preorder Traversal.
+// Memory Usage: 33.8 MB, less than 79.31 % of JavaScript online submissions for Binary Tree Preorder Traversal.
+
+
+// 3) 迭代、另一版本
+// update: 2019-12-21 22:23
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+function TreeNode(val) {
+  this.val = val
+  this.left = null
+  this.right = null
+}
+const preorderTraversal = (root) => {
+  let nodes = []
+  let stack = []
+  while (root || stack.length) {
+    if (root) {
+      nodes.push(root.val)
+      if (root.right) {
+        stack.push(root.right) // 存储右节点
+      }
+      root = root.left
+    } else {
+      let top = stack.pop()
+      root = top  // 寻找到存储的节点
+    }
+  }
+  return nodes
+}
+// Runtime: 56 ms, faster than 57.10 % of JavaScript online submissions for Binary Tree Preorder Traversal.
+// Memory Usage: 33.9 MB, less than 51.72 % of JavaScript online submissions for Binary Tree Preorder Traversal.
+
+
