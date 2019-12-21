@@ -144,3 +144,41 @@ const inorderTraversal = (root) => {
 // Runtime: 44 ms, faster than 98.11 % of JavaScript online submissions for Binary Tree Inorder Traversal.
 // Memory Usage: 33.8 MB, less than 65.63 % of JavaScript online submissions for Binary Tree Inorder Traversal.
 
+
+// 3) 迭代
+// Time: 2019-12-21 10:52
+// https://leetcode.com/problems/binary-tree-inorder-traversal/discuss/31231/C%2B%2B-Iterative-Recursive-and-Morris
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+function TreeNode(val) {
+  this.val = val
+  this.left = null
+  this.right = null
+}
+const inorderTraversal = (root) => {
+  let nodes = []
+  let stack = []
+  while (root || stack.length) {
+    while (root) {
+      stack.push(root)
+      root = root.left
+    }
+    let top = stack.pop()
+    root = top
+    nodes.push(root.val)
+    root = root.right
+  }
+  return nodes
+}
+// Runtime: 56 ms, faster than 58.02 % of JavaScript online submissions for Binary Tree Inorder Traversal.
+// Memory Usage: 33.7 MB, less than 75.00 % of JavaScript online submissions for Binary Tree Inorder Traversal.
+
