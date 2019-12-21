@@ -90,3 +90,43 @@ const postorderTraversal = (root) => {
 // Runtime: 52 ms, faster than 81.94 % of JavaScript online submissions for Binary Tree Postorder Traversal.
 // Memory Usage: 33.8 MB, less than 64.29 % of JavaScript online submissions for Binary Tree Postorder Traversal.
 
+
+// 3) 迭代、另一种简单方式
+// update: 2019-12-21 23:51
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+function TreeNode(val) {
+  this.val = val
+  this.left = null
+  this.right = null
+}
+const postorderTraversal = (root) => {
+  let nodes = []
+  let stack = []
+  if (root) {
+    stack.push(root)
+  }
+  while (stack.length) {
+    root = stack.pop()
+    nodes.unshift(root.val)
+    if (root.left) {
+      stack.push(root.left)
+    }
+    if (root.right) {
+      stack.push(root.right)
+    }
+  }
+  return nodes
+}
+// Runtime: 56 ms, faster than 57.75 % of JavaScript online submissions for Binary Tree Postorder Traversal.
+// Memory Usage: 33.8 MB, less than 85.71 % of JavaScript online submissions for Binary Tree Postorder Traversal.
+
