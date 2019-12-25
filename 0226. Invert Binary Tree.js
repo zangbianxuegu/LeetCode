@@ -105,3 +105,60 @@ const invertTree = (root) => {
 }
 // Runtime: 60 ms, faster than 29.60% of JavaScript online submissions for Invert Binary Tree.
 // Memory Usage: 33.8 MB, less than 60.00% of JavaScript online submissions for Invert Binary Tree.
+
+
+// 3) DFS
+// 深度优先遍历：从栈数组的尾出栈，尾入栈，后入栈的先出栈
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+const invertTree = (root) => {
+  let stack = [root]
+  while (stack.length) {
+    let node = stack.pop()
+    if (node) {
+      [node.left, node.right] = [node.right, node.left]
+      stack.push(node.left, node.right)
+    }
+  }
+  return root
+}
+// Runtime: 48 ms, faster than 93.91% of JavaScript online submissions for Invert Binary Tree.
+// Memory Usage: 33.8 MB, less than 60.00% of JavaScript online submissions for Invert Binary Tree.
+
+
+// 4) BFS
+// 广度优先遍历：从栈数组的头出栈，尾加入左右子节点，先入栈的先出栈
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+const invertTree = (root) => {
+  let stack = [root]
+  while (stack.length) {
+    let node = stack.shift()
+    if (node) {
+      [node.left, node.right] = [node.right, node.left]
+      stack.push(node.left, node.right)
+    }
+  }
+  return root
+}
+// Runtime: 56 ms, faster than 58.22% of JavaScript online submissions for Invert Binary Tree.
+// Memory Usage: 33.8 MB, less than 60.00% of JavaScript online submissions for Invert Binary Tree.
+
