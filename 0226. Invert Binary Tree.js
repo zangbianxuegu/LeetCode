@@ -84,3 +84,24 @@ const invertTree = (root) => {
 // console.log(invertTree(root))
 
 
+// 2) 递归
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {TreeNode}
+ */
+const invertTree = (root) => {
+  if (!root) {
+    return null
+  }
+  [root.left, root.right] = [invertTree(root.right), invertTree(root.left)]
+  return root
+}
+// Runtime: 60 ms, faster than 29.60% of JavaScript online submissions for Invert Binary Tree.
+// Memory Usage: 33.8 MB, less than 60.00% of JavaScript online submissions for Invert Binary Tree.
