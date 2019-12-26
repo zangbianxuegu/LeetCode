@@ -53,7 +53,7 @@ const pathSum = (root, sum) => {
   let paths = []
   findPaths(root, sum, path, paths)
   return paths
-};
+}
 // Runtime: 64 ms, faster than 94.48% of JavaScript online submissions for Path Sum II.
 // Memory Usage: 37.4 MB, less than 90.00% of JavaScript online submissions for Path Sum II.
 
