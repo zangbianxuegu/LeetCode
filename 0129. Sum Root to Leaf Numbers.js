@@ -85,3 +85,20 @@ const sumNumbers = (root) => {
 // Memory Usage: 34 MB, less than 100.00 % of JavaScript online submissions for Sum Root to Leaf Numbers.
 
 
+// 2) 递归
+// https://leetcode.com/problems/sum-root-to-leaf-numbers/discuss/449071/4-line-JavaScript-solution(faster-than-96.8)
+// 思路：将每个节点值字符串相加，直接对子节点递归
+const sumNumbers = (root, sum = '') => {
+  if (!root) {
+    return 0
+  }
+  sum += root.val
+  if (!root.left && !root.right) {
+    return parseInt(sum)
+  }
+  return sumNumbers(root.left, sum) + sumNumbers(root.right, sum)
+}
+// Runtime: 56 ms, faster than 71.36 % of JavaScript online submissions for Sum Root to Leaf Numbers.
+// Memory Usage: 34.1 MB, less than 100.00 % of JavaScript online submissions for Sum Root to Leaf Numbers.
+
+
