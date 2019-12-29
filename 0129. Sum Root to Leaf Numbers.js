@@ -88,6 +88,17 @@ const sumNumbers = (root) => {
 // 2) 递归
 // https://leetcode.com/problems/sum-root-to-leaf-numbers/discuss/449071/4-line-JavaScript-solution(faster-than-96.8)
 // 思路：将每个节点值字符串相加，直接对子节点递归
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
 const sumNumbers = (root, sum = '') => {
   if (!root) {
     return 0
@@ -101,4 +112,139 @@ const sumNumbers = (root, sum = '') => {
 // Runtime: 56 ms, faster than 71.36 % of JavaScript online submissions for Sum Root to Leaf Numbers.
 // Memory Usage: 34.1 MB, less than 100.00 % of JavaScript online submissions for Sum Root to Leaf Numbers.
 
+
+// 3) 迭代、DFS
+// 将每个节点从上一级累加得到结果存在节点值中
+// 这种方法改变了输入的二叉树
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+const sumNumbers = (root) => {
+  if (!root) {
+    return 0
+  }
+  let sum = 0
+  let stack = [root]
+  while (stack.length) {
+    let node = stack.pop()
+    if (node.left) {
+      node.left.val = node.val * 10 + node.left.val
+      stack.push(node.left)
+    }
+    if (node.right) {
+      node.right.val = node.val * 10 + node.right.val
+      stack.push(node.right)
+    }
+    if (!node.left && !node.right) {
+      sum += node.val
+    }
+  }
+  return sum
+}
+// Runtime: 52 ms, faster than 89.32% of JavaScript online submissions for Sum Root to Leaf Numbers.
+// Memory Usage: 33.9 MB, less than 100.00 % of JavaScript online submissions for Sum Root to Leaf Numbers.
+
+
+// 4) 迭代、BFS
+// 将每个节点从上一级累加得到结果存在节点值中
+// 这种方法改变了输入的二叉树
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+const sumNumbers = (root) => {
+  if (!root) {
+    return 0
+  }
+  let sum = 0
+  let queue = [root]
+  while (queue.length) {
+    let node = queue.shift()
+    if (node.left) {
+      node.left.val = node.val * 10 + node.left.val
+      queue.push(node.left)
+    }
+    if (node.right) {
+      node.right.val = node.val * 10 + node.right.val
+      queue.push(node.right)
+    }
+    if (!node.left && !node.right) {
+      sum += node.val
+    }
+  }
+  return sum
+}
+// Runtime: 52 ms, faster than 89.32% of JavaScript online submissions for Sum Root to Leaf Numbers.
+// Memory Usage: 34 MB, less than 100.00 % of JavaScript online submissions for Sum Root to Leaf Numbers.
+
+
+// 5) 迭代、BFS
+// https://leetcode.com/problems/sum-root-to-leaf-numbers/discuss/41383/Python-solutions-(dfs%2Bstack-bfs%2Bqueue-dfs-recursively).
+// 将每个节点从上一级累加得到结果随队列一起保存，到叶节点累加求和
+// 这样不改变输入的二叉树
+// python 的元组和列表的组合看起来不错~
+// stack, res = [(root, root.val)], 0
+// node, value = stack.pop()
+// stack.append((node.right, value * 10 + node.right.val))
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number}
+ */
+const sumNumbers = (root) => {
+  if (!root) {
+    return 0
+  }
+  let sum = 0
+  let queue = [
+    {
+      node: root,
+      sum: root.val
+    }
+  ]
+  while (queue.length) {
+    let q = queue.shift()
+    if (q.node.left) {
+      let sum = q.sum * 10 + q.node.left.val
+      queue.push({
+        node: q.node.left,
+        sum: sum
+      })
+    }
+    if (q.node.right) {
+      let sum = q.sum * 10 + q.node.right.val
+      queue.push({
+        node: q.node.right,
+        sum: sum
+      })
+    }
+    if (!q.node.left && !q.node.right) {
+      sum += q.sum
+    }
+  }
+  return sum
+}
+// Runtime: 48 ms, faster than 96.82 % of JavaScript online submissions for Sum Root to Leaf Numbers.
+// Memory Usage: 34.1 MB, less than 100.00 % of JavaScript online submissions for Sum Root to Leaf Numbers.
 
