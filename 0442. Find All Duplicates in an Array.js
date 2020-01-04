@@ -37,3 +37,23 @@ const findDuplicates = (nums) => {
 }
 // Runtime: 116 ms, faster than 58.42 % of JavaScript online submissions for Find All Duplicates in an Array.
 // Memory Usage: 48.1 MB, less than 50.00 % of JavaScript online submissions for Find All Duplicates in an Array.
+
+
+// 2) sort
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+const findDuplicates = (nums) => {
+  let res = []
+  num.sort((a, b) => a - b)
+  for (let i = 0; i < nums.length - 1; i++) {
+    if (nums[i] === nums[i + 1]) {
+      res.push(nums[i])
+    }
+  }
+  return res
+}
+// Runtime: 152 ms, faster than 32.20% of JavaScript online submissions for Find All Duplicates in an Array.
+// Memory Usage: 45.2 MB, less than 50.00 % of JavaScript online submissions for Find All Duplicates in an Array.
+
