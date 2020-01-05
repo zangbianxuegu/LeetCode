@@ -57,3 +57,23 @@ const findDuplicates = (nums) => {
 // Runtime: 152 ms, faster than 32.20% of JavaScript online submissions for Find All Duplicates in an Array.
 // Memory Usage: 45.2 MB, less than 50.00 % of JavaScript online submissions for Find All Duplicates in an Array.
 
+
+// 3) index
+// 思路：审题很重要！此种解法之所以巧妙，也在于问题的设置。因为是 1 到 n 的 n 个数，可以将值与 index 关联，重复的数值将对应同一个 index。
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+const findDuplicates = (nums) => {
+  let res = []
+  for (let i = 0; i < nums.length; i++) {
+    let index = Math.abs(nums[i]) - 1
+    if (nums[i] < 0) {
+      res.push(Math.abs(index + 1))
+    }
+    nums[index] = - nums[index]
+  }
+  return res
+}
+// Runtime: 108 ms, faster than 69.08% of JavaScript online submissions for Find All Duplicates in an Array.
+// Memory Usage: 43.8 MB, less than 50.00 % of JavaScript online submissions for Find All Duplicates in an Array.
