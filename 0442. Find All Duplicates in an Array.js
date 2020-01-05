@@ -58,7 +58,7 @@ const findDuplicates = (nums) => {
 // Memory Usage: 45.2 MB, less than 50.00 % of JavaScript online submissions for Find All Duplicates in an Array.
 
 
-// 3) index
+// 3) mark by negating
 // 思路：审题很重要！此种解法之所以巧妙，也在于问题的设置。因为是 1 到 n 的 n 个数，可以将值与 index 关联，重复的数值将对应同一个 index。
 /**
  * @param {number[]} nums
