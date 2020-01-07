@@ -77,3 +77,59 @@ MinStack.prototype.getMin = function() {
 // Memory Usage: 44.4 MB, less than 37.50% of JavaScript online submissions for Min Stack.
 
 
+// 2) one stack
+// https://leetcode.com/problems/min-stack/discuss/49014/Java-accepted-solution-using-one-stack
+/**
+ * initialize your data structure here.
+ */
+let MinStack = function() {
+  this.minStack = []
+  this.min = Infinity
+}
+
+/** 
+ * @param {number} x
+ * @return {void}
+ */
+MinStack.prototype.push = function(x) {
+  if (x <= this.min) {
+    this.minStack.push(this.min)
+    this.min = x
+  }
+  this.minStack.push(x)
+}
+
+/**
+ * @return {void}
+ */
+MinStack.prototype.pop = function() {
+  if (this.minStack.pop() === this.min) {
+    this.min = this.minStack.pop()
+  }
+}
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.top = function() {
+  return this.minStack[this.minStack.length - 1]
+}
+
+/**
+ * @return {number}
+ */
+MinStack.prototype.getMin = function() {
+  return this.min
+}
+
+/** 
+ * Your MinStack object will be instantiated and called as such:
+ * var obj = new MinStack()
+ * obj.push(x)
+ * obj.pop()
+ * var param_3 = obj.top()
+ * var param_4 = obj.getMin()
+ */
+
+// Runtime: 100 ms, faster than 88.42% of JavaScript online submissions for Min Stack.
+// Memory Usage: 44.7 MB, less than 25.00% of JavaScript online submissions for Min Stack.
