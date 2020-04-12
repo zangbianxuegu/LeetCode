@@ -40,6 +40,30 @@ const minimumTotal = function(triangle) {
   }
 }
 
+// 2) space: O(n)
+const minimumTotal = function(triangle) {
+  if (triangle.length) {
+    if (triangle.length === 1 && triangle[0].length) {
+      return triangle[0][0]
+    } else {
+      // 每一行，由下到上，得到当前位置累加和的最小值
+      let n = triangle.length
+      let min = triangle[n - 1]
+      for (let i = n - 2; i >= 0; i--) {
+        min = []
+        for (let j = 0; j < triangle[i].length; j++) {
+          min.push(
+            triangle[i][j] +
+              Math.min(triangle[i + 1][j], triangle[i + 1][j + 1])
+          )
+        }
+        triangle[i] = min
+      }
+      return min[0]
+    }
+  }
+}
+
 // Test case:
 // [[-1],[2,3],[1,-1,-3]]
 // [[1]]
