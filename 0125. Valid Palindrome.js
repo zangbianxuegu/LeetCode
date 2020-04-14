@@ -11,23 +11,22 @@
 // Input: "race a car"
 // Output: false
 
-
-// 1) 
+// 1)
 /**
  * @param {string} s
  * @return {boolean}
  */
 const isPalindrome = s => {
-  let a = s.replace(/\W/g, "").toLowerCase()
+  const a = s.replace(/\W/g, '').toLowerCase()
   return (
     a ===
     a
-      .split("")
+      .split('')
       .reverse()
-      .join("")
+      .join('')
   )
 }
 
-// let s = "A man, a plan, a canal: Panama"
-// let s = "race a car"
+// const s = 'A man, a plan, a canal: Panama'
+// const s = 'race a car'
 // console.log(isPalindrome(s))
