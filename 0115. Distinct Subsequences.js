@@ -40,9 +40,42 @@
 // babgbag
 //     ^^^
 
+//       b a g
+//     0 1 2 3
+//   0 1 0 0 0
+// b 1 1 1 0 0
+// a 2 1 1 1 0
+// b 3 1 2 1 0
+// g 4 1 2 1 1
+// b 5 1 3 1 1
+// a 6 1 3 4 1
+// g 7 1 3 4 5
+
 /**
  * @param {string} s
  * @param {string} t
  * @return {number}
  */
-const numDistinct = (s, t) => {}
+const numDistinct = (s, t) => {
+  const sLen = s.length
+  const tLen = t.length
+  const dp = [...Array(tLen + 1)].map(() => Array(sLen + 1).fill(0))
+  for (let j = 0; j < sLen; j++) {
+    dp[0][j] = 1
+  }
+  for (let i = 0; i < tLen; i++) {
+    for (let j = 0; j < sLen; j++) {
+      if (t[i] === s[j]) {
+        dp[i + 1][j + 1] = dp[i][j] + dp[i + 1][j]
+      } else {
+        dp[i + 1][j + 1] = dp[i + 1][j]
+      }
+    }
+  }
+  return dp[tLen][sLen]
+}
+
+// test case:
+const s = 'babgbag'
+const t = 'bag'
+console.log(numDistinct(s, t))
