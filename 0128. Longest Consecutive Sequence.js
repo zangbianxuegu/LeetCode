@@ -32,3 +32,24 @@ const longestConsecutive = function(nums) {
   }
   return res
 }
+
+// 2) Hash
+/**
+ * @param {number[]} nums
+ * @return {number}
+ */
+const longestConsecutive = function(nums) {
+  let obj = {}
+  let res = 0
+  for (const num of nums) {
+    if (obj[num]) continue
+    const l = obj[num - 1] || 0
+    const r = obj[num + 1] || 0
+    const len = l + r + 1
+    obj[num - l] = len
+    obj[num] = len
+    obj[num + r] = len
+    res = Math.max(res, len)
+  }
+  return res
+}
