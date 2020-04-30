@@ -34,13 +34,41 @@
 
 // Explanation: The endWord "cog" is not in wordList, therefore no possible transformation.
 
-// 1)
+// 1) BFS
 /**
  * @param {string} beginWord
  * @param {string} endWord
  * @param {string[]} wordList
  * @return {string[][]}
  */
-const findLadders = function(beginWord, endWord, wordList) {}
-
-console.log(findLadders('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log']))
+const findLadders = (beginWord, endWord, wordList) => {
+  const dict = new Set(wordList)
+  const visited = new Set()
+  const res = []
+  const q = [[beginWord]]
+  let step = Infinity
+  while (q.length) {
+    const path = q.shift()
+    if (path.length === step) return res
+    const w = path[path.length - 1]
+    for (let i = 0; i < w.length; i++) {
+      for (let j = 0; j < 26; j++) {
+        const w2 = w.slice(0, i) + String.fromCharCode(97 + j) + w.slice(i + 1) // 97 -> 'a'
+        if (dict.has(w2) && w2 !== w) {
+          if (!visited.has(w2)) {
+            q.push([...path, w2])
+          }
+          if (w2 === endWord) {
+            if (path.length < step) {
+              step = path.length + 1
+            }
+            res.push([...path, w2])
+          }
+        }
+      }
+    }
+    visited.add(w)
+  }
+  return res
+}
+console.log(findLadders('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))

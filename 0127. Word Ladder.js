@@ -63,4 +63,4 @@ const ladderLength = (beginWord, endWord, wordList) => {
   }
   return 0
 }
-console.log(ladderLength('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
+// console.log(ladderLength('hit', 'cog', ['hot', 'dot', 'dog', 'lot', 'log', 'cog']))
