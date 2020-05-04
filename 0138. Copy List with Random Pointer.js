@@ -65,3 +65,37 @@ const copyRandomList = function(head) {
   }
   return copy(head)
 }
+
+
+// 2)
+/**
+ * // Definition for a Node.
+ * function Node(val, next, random) {
+ *    this.val = val;
+ *    this.next = next;
+ *    this.random = random;
+ * };
+ */
+
+/**
+ * @param {Node} head
+ * @return {Node}
+ */
+const copyRandomList = function(head) {
+  if (!head) {
+    return null
+  }
+  let cur = head
+  const visited = new Map()
+  while (cur && !visited.has(cur)) {
+    visited.set(cur, new Node(cur.val))
+    cur = cur.next
+  }
+  cur = head
+  while (cur) {
+    visited.get(cur).next = visited.get(cur.next) || null
+    visited.get(cur).random = visited.get(cur.random) || null
+    cur = cur.next
+  }
+  return visited.get(head)
+}
