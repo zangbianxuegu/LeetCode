@@ -13,6 +13,7 @@
 // Explanation: The result cannot be 2, because [-2,-1] is not a subarray.
 
 // 1) Brute
+// Time: O(n^2)
 /**
  * @param {number[]} nums
  * @return {number}
@@ -39,7 +40,9 @@ const maxProduct = function(nums) {
 }
 
 // 2) 动态规划
-// similar: 53
+// Similar: 0053
+// Time: O(n)
+// 思路：暴力 n^2 的解法很容易理解，但是要让时间复杂度为 O(n)。参考 53 题也不容易解出，每一个元素对应能产生的最大乘积好像无法保存，因为这个值有可能是从它之前任意一个位置开始乘。关键是想出要同时*保存最小乘积*，每一个元素都对应一个最大乘积和一个最小乘积，下一个元素的成大乘积在它自身、自身乘上一个元素最大值、*自身乘上一个元素最小值*中产生。一遍循环求出所有元素的最大乘积，取最大值。
 /**
  * @param {number[]} nums
  * @return {number}
