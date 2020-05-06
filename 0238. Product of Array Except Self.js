@@ -11,7 +11,7 @@
 // Follow up:
 // Could you solve it with constant space complexity? (The output array does not count as extra space for the purpose of space complexity analysis.)
 
-// 1) 两次循环
+// 1) 两次循环，考虑 0
 /**
  * @param {number[]} nums
  * @return {number[]}
@@ -50,3 +50,43 @@ const productExceptSelf = function(nums) {
 // const nums = [0, 2, 3, 4]
 // const nums = [0, 2, 0, 4]
 // console.log(productExceptSelf(nums))
+
+// 2) 
+// 思路：一遍循环完成、遍历所有元素，应该能确定所求数组的每个值。巧妙之处在于舍弃的考虑，只累加当前，不应考虑一遍循环完值是多少，所以至少需要 2 次循环。从左往右，只考虑左边，计算累计值。然后从右往左，考虑右边的累计值。
+// 3) 更巧妙，一遍循环时，i、n - 1 同时考虑，更新数组。
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+const productExceptSelf = nums => {
+  const len = nums.length
+  const res = [1]
+  for (let i = 1; i < len; i++) {
+    res[i] = res[i - 1] * nums[i - 1]
+  }
+  let right = 1
+  for (let i = len - 1; i >= 0; i--) {
+    res[i] *= right
+    right *= nums[i]
+  }
+  return res
+}
+
+// 3) 
+/**
+ * @param {number[]} nums
+ * @return {number[]}
+ */
+const productExceptSelf = nums => {
+  const len = nums.length
+  const res = Array(len).fill(1)
+  let left = 1
+  let right = 1
+  for (let i = 0, j = len - 1; i < len - 1; i++, j--) {
+    left *= nums[i]
+    right *= nums[j]
+    res[i + 1] *= left
+    res[j - 1] *= right
+  }
+  return res
+}
