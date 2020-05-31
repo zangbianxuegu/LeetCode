@@ -41,6 +41,9 @@ const containsNearbyAlmostDuplicate = function(nums, k, t) {
     } else if (range > k) {
       r++
     }
+    if (l === r) {
+      r++
+    }
   }
   return false
 }
