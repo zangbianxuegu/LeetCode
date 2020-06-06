@@ -27,7 +27,7 @@
 
 
 // 1) Map
-// * 面向测试用例编程，没有很好的思路
+// ! 面向测试用例编程，没有很好的思路
 // ? 参数 numCourses 并没有什么卵用啊？？
 /**
  * @param {number} numCourses
@@ -49,3 +49,60 @@ const canFinish = (numCourses, prerequisites) => {
   }
   return true
 }
+// Runtime: 1472 ms, faster than 5.09% of JavaScript online submissions for Course Schedule.
+// Memory Usage: 43.6 MB, less than 20.65% of JavaScript online submissions for Course Schedule.
+
+// Test case:
+// console.log(canFinish(2, [[0, 1]]));
+// console.log(canFinish(2, [[0, 1], [1, 0]]));
+// console.log(canFinish(2, [[1,0],[0,2],[2,1]]));
+// console.log(canFinish(2, [[1,0],[2,0],[0,2]]));
+// console.log(canFinish(2, [[1,0],[1,2],[0,1]]));
+
+
+// 2) Topological BFS
+// similar: 0210
+/**
+ * @param {number} numCourses
+ * @param {number[][]} prerequisites
+ * @return {boolean}
+ */
+const canFinish = (numCourses, prerequisites) => {
+  const inDegrees = Array(numCourses).fill(0)  
+  const graph = buildGraph(numCourses, prerequisites)
+  const queue = []
+  for (const [v] of prerequisites) {    
+    inDegrees[v]++
+  }  
+  for (let i = 0; i < inDegrees.length; i++) {
+    if (inDegrees[i] === 0) {
+      queue.push(i)
+    }
+  }
+  function buildGraph (num, prerequisites) {
+    const graph = Array(num).fill(null)
+    for (const [v, u] of prerequisites) {
+      if (!graph[u]) {
+        graph[u] = [v]
+      } else {
+        graph[u].push(v)
+      }
+    }
+    return graph
+  }
+  while (queue.length) {
+    const cur = queue.shift()
+    numCourses--
+    if (graph[cur]) {
+      for (const v of graph[cur]) {      
+        inDegrees[v]--
+        if (inDegrees[v] === 0) {
+          queue.push(v)
+        }
+      }
+    }
+  }
+  return numCourses === 0
+}
+// Runtime: 136 ms, faster than 29.00% of JavaScript online submissions for Course Schedule.
+// Memory Usage: 44.2 MB, less than 17.85% of JavaScript online submissions for Course Schedule.
