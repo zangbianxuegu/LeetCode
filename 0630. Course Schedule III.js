@@ -56,7 +56,7 @@ const scheduleCourse = (courses) => {
   courses.sort((a, b) => a[1] - b[1])
   let res = 0
   const n = courses.length
-  const cache = [...Array(n)].map(() => Array(courses[n - 1][1]))  
+  const cache = [...Array(n + 1)].map(() => Array(courses[n - 1][1]))  
   return helper(courses, 0, 0, cache)
   function helper (courses, curDay, index, cache) {
     if (index === n) {
@@ -75,4 +75,26 @@ const scheduleCourse = (courses) => {
     cache[index][curDay] = Math.max(taken, notTaken)
     return cache[index][curDay]
   }
+}
+
+
+// 3)
+// https://leetcode.com/problems/course-schedule-iii/discuss/513455/javascript-sort-and-dp-explain-in-comments
+/**
+ * @param {number[][]} courses
+ * @return {number}
+ */
+const scheduleCourse = (courses) => {
+  if (!courses.length) return 0
+  courses.sort(([t1, d1], [t2, d2]) => d2 - d1)
+  let arr = Array(courses.length + 1).fill(-1)
+  arr[0] = Number.MAX_SAFE_INTEGER
+  let maxCount = 0
+  for (let [t, d] of courses) {
+    for (let i = maxCount + 1; i > 0; i--) {
+      arr[i] = Math.max(arr[i], Math.min(arr[i - 1], d) - t)      
+      if (arr[i] > -1 && i > maxCount) maxCount = i
+    }
+  }
+  return maxCount
 }
