@@ -98,3 +98,60 @@ const scheduleCourse = (courses) => {
   }
   return maxCount
 }
+
+
+// 4) max heap
+/**
+ * @param {number[][]} courses
+ * @return {number}
+ */
+const scheduleCourse = (courses) => {
+  let day = 0
+  const learned = []
+  courses.sort((a, b) => a[1] - b[1])
+  courses.forEach(([duration, endDay]) => {
+    learned.push(duration)
+    buildHeap(learned)
+    day += duration
+    if (day > endDay) {
+      swap(learned, learned.length - 1, 0)
+      day -= learned.pop()
+      maxHeapify(learned, learned.length - 1, 0)
+    }
+  })
+  return learned.length
+  // 创建堆
+  function buildHeap (arr) {
+    const len = arr.length
+    const parent = getParent(len)
+    for (let i = parent; i >= 0; i--) {
+      maxHeapify(arr, len, i)
+    }
+  }
+  // 维护堆
+  function maxHeapify (arr, heapSize, index) {
+    let larget = index
+    const [left, right] = getChilren(index)
+    if (left < heapSize && arr[left] > arr[index]) {
+      larget = left
+    }
+    if (right < heapSize && arr[right] > arr[larget]) {
+      larget = right
+    }
+    if (larget !== index) {
+      swap(arr, index, larget)
+      maxHeapify(arr, heapSize, larget)
+    }
+    return arr
+  }
+  function getParent (index) {
+    return Math.floor((index - 1) / 2)
+  }
+  function getChilren (index) {
+    return [index * 2 + 1, index * 2 + 2]
+  }
+  function swap (A, a, b) {
+    [A[a], A[b]] = [A[b], A[a]]
+  }
+}
+
