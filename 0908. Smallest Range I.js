@@ -61,8 +61,8 @@ const smallestRangeI = (A, K) => {
 const smallestRangeI = (A, K) => {
   let max = Math.max(...A)
   let min = Math.min(...A)
-  return (max - K) - (min + K) < 0 ? 0 : (max - K) - (min + K)
+  return Math.max(0, (max - K) - (min + K))
 }
-// Runtime: 68 ms, faster than 40.63% of JavaScript online submissions for Smallest Range I.
-// Memory Usage: 35.1 MB, less than 93.90% of JavaScript online submissions for Smallest Range I.
+// Runtime: 88 ms, faster than 8.33% of JavaScript online submissions for Smallest Range I.
+// Memory Usage: 34.9 MB, less than 98.78% of JavaScript online submissions for Smallest Range I.
 
