@@ -56,7 +56,7 @@ const scheduleCourse = (courses) => {
   courses.sort((a, b) => a[1] - b[1])
   let res = 0
   const n = courses.length
-  const cache = [...Array(n)].map(() => Array(courses[n - 1][1]))  
+  const cache = [...Array(n + 1)].map(() => Array(courses[n - 1][1]))  
   return helper(courses, 0, 0, cache)
   function helper (courses, curDay, index, cache) {
     if (index === n) {
@@ -76,3 +76,82 @@ const scheduleCourse = (courses) => {
     return cache[index][curDay]
   }
 }
+
+
+// 3)
+// https://leetcode.com/problems/course-schedule-iii/discuss/513455/javascript-sort-and-dp-explain-in-comments
+/**
+ * @param {number[][]} courses
+ * @return {number}
+ */
+const scheduleCourse = (courses) => {
+  if (!courses.length) return 0
+  courses.sort(([t1, d1], [t2, d2]) => d2 - d1)
+  let arr = Array(courses.length + 1).fill(-1)
+  arr[0] = Number.MAX_SAFE_INTEGER
+  let maxCount = 0
+  for (let [t, d] of courses) {
+    for (let i = maxCount + 1; i > 0; i--) {
+      arr[i] = Math.max(arr[i], Math.min(arr[i - 1], d) - t)      
+      if (arr[i] > -1 && i > maxCount) maxCount = i
+    }
+  }
+  return maxCount
+}
+
+
+// 4) max heap
+/**
+ * @param {number[][]} courses
+ * @return {number}
+ */
+const scheduleCourse = (courses) => {
+  let day = 0
+  const learned = []
+  courses.sort((a, b) => a[1] - b[1])
+  courses.forEach(([duration, endDay]) => {
+    learned.push(duration)
+    buildHeap(learned)
+    day += duration
+    if (day > endDay) {
+      swap(learned, learned.length - 1, 0)
+      day -= learned.pop()
+      maxHeapify(learned, learned.length - 1, 0)
+    }
+  })
+  return learned.length
+  // 创建堆
+  function buildHeap (arr) {
+    const len = arr.length
+    const parent = getParent(len)
+    for (let i = parent; i >= 0; i--) {
+      maxHeapify(arr, len, i)
+    }
+  }
+  // 维护堆
+  function maxHeapify (arr, heapSize, index) {
+    let larget = index
+    const [left, right] = getChilren(index)
+    if (left < heapSize && arr[left] > arr[index]) {
+      larget = left
+    }
+    if (right < heapSize && arr[right] > arr[larget]) {
+      larget = right
+    }
+    if (larget !== index) {
+      swap(arr, index, larget)
+      maxHeapify(arr, heapSize, larget)
+    }
+    return arr
+  }
+  function getParent (index) {
+    return Math.floor((index - 1) / 2)
+  }
+  function getChilren (index) {
+    return [index * 2 + 1, index * 2 + 2]
+  }
+  function swap (A, a, b) {
+    [A[a], A[b]] = [A[b], A[a]]
+  }
+}
+
