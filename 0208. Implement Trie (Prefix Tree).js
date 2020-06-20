@@ -42,7 +42,8 @@ class Trie {
 // Memory Usage: 47.7 MB, less than 99.88% of JavaScript online submissions for Implement Trie (Prefix Tree).
 
 
-// 2) prefix tree 前缀树
+// 2) Trie prefix tree 前缀树
+// similar: 0211 0745
 // 参考 Solution
 // insert: Time: O(m), Space: O(m), m 为 word 的长度
 // search: Time: O(m), Space: O(1)

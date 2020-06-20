@@ -17,7 +17,8 @@
 // You may assume that all words are consist of lowercase letters a-z.
 
 
-// 1) 
+// 1) Trie
+// similar: 0208 0745
 class WordDictionary {
   constructor () {
     this.root = {}
