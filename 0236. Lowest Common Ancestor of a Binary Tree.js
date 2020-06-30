@@ -4,14 +4,13 @@
 
 // Given the following binary tree:  root = [3,5,1,6,2,0,8,null,null,7,4]
 
-//         3
-//       /   \
-//      /     \
-//     5       1
-//   /   \   /   \
-//  6     2 0     8
+//        3
 //       / \
-//      7   4
+//     5     1
+//    / \   / \
+//   6   2  0   8
+//      / \
+//     7   4
 
 // Example 1:
 
@@ -24,6 +23,11 @@
 // Input: root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 4
 // Output: 5
 // Explanation: The LCA of nodes 5 and 4 is 5, since a node can be a descendant of itself according to the LCA definition.
+
+// Note:
+
+// All of the nodes' values will be unique.
+// p and q are different and both values will exist in the binary tree.
 
 
 // 1) recursion
@@ -61,3 +65,41 @@ const lowestCommonAncestor = (root, p, q) => {
 }
 // Runtime: 92 ms, faster than 37.53% of JavaScript online submissions for Lowest Common Ancestor of a Binary Tree.
 // Memory Usage: 45.7 MB, less than 5.11% of JavaScript online submissions for Lowest Common Ancestor of a Binary Tree.
+
+
+// 2) recursion
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @param {TreeNode} p
+ * @param {TreeNode} q
+ * @return {TreeNode}
+ */
+const lowestCommonAncestor = (root, p, q) => {
+  function find(node) {
+    if (node === null) {
+      return null 
+    }
+    if (node === p || node === q) {
+      return node
+    }
+    const left = find(node.left)
+    const right = find(node.right)
+    if (left === null) {
+      return right
+    }
+    if (right === null) {
+      return left
+    }
+    return node
+  }
+  return find(root)
+}
+// Runtime: 104 ms, faster than 23.58% of JavaScript online submissions for Lowest Common Ancestor of a Binary Tree.
+// Memory Usage: 44.9 MB, less than 6.01% of JavaScript online submissions for Lowest Common Ancestor of a Binary Tree.
