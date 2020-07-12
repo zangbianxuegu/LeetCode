@@ -38,6 +38,7 @@
 // 1 <= s.length <= 10^5
 
 
+// 1)
 /**
  * @param {string} s
  * @return {number}
@@ -59,3 +60,22 @@ const numSub = (s) => {
 }
 // Runtime: 116 ms, faster than 100.00% of JavaScript online submissions for Number of Substrings With Only 1s.
 // Memory Usage: 37.4 MB, less than 100.00% of JavaScript online submissions for Number of Substrings With Only 1s.
+
+
+// 2) 更优雅的方式
+/**
+ * @param {string} s
+ * @return {number}
+ */
+const numSub = (s) => {
+  let res = 0
+  let n = 0
+  const mod = 1e9 + 7
+  for (const c of s) {
+    n = c === '1' ? n + 1 : 0
+    res = (res + n) % mod
+  }
+  return res
+}
+// Runtime: 132 ms, faster than 100.00% of JavaScript online submissions for Number of Substrings With Only 1s.
+// Memory Usage: 38.2 MB, less than 100.00% of JavaScript online submissions for Number of Substrings With Only 1s.
