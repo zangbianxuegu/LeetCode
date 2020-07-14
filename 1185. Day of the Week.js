@@ -34,8 +34,8 @@
  */
 const dayOfTheWeek = (day, month, year) => {
   const week = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-  return week[new Date(String(year) + '-' + String(month) + '-' + String(day)).getDay()]
+  return week[new Date(`${year}-${month}-${day}`).getDay()]
 }
-// Runtime: 64 ms, faster than 77.78% of JavaScript online submissions for Day of the Week.
-// Memory Usage: 33.4 MB, less than 52.63% of JavaScript online submissions for Day of the Week.
+// Runtime: 68 ms, faster than 56.08% of JavaScript online submissions for Day of the Week.
+// Memory Usage: 33.5 MB, less than 50.00% of JavaScript online submissions for Day of the Week.
 
