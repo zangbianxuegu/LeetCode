@@ -15,11 +15,7 @@
 // Could you do this in one pass ?
 
 
-<<<<<<< HEAD
-// 1) 
-=======
 // 1) two pointers
->>>>>>> 0590f0e5b1767c3662c0d663af031aa679e17f82
 /**
  * Definition for singly-linked list.
  * function ListNode(val) {
