@@ -145,3 +145,109 @@ class LRUCache {
     }
   }
 }
+
+
+// 3) Map + Double linked list
+class Node {
+  constructor(key, value) {
+    this.key = key
+    this.value = value
+    this.prev = null
+    this.next = null
+  }
+}
+
+class DLinkedNode {
+  constructor() {
+    this.head = new Node()
+    this.tail = new Node()
+    this.head.next = this.tail
+    this.tail.prev = this.head
+  }
+  addToHead(node) {
+    node.prev = this.head
+    node.next = this.head.next
+    this.head.next.prev = node
+    this.head.next = node
+  }
+  removeNode(node) {
+    let prev = node.prev
+    let next = node.next
+    prev.next = next
+    next.prev = prev
+  }
+  moveToHead(node) {
+    this.removeNode(node)
+    this.addToHead(node)
+  }
+  popTail() {
+    let tail = this.tail.prev
+    this.removeNode(tail)
+    return tail
+  }
+}
+
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity
+    this.count = 0
+    this.cache = new Map()
+    this.dll = new DLinkedNode()
+  }
+  get(key) {
+    let node = this.cache.get(key)
+    if (!node) {
+      return -1
+    }
+    this.dll.moveToHead(node)
+    return node.value
+  }
+  put(key, value) {
+    let node = this.cache.get(key)
+    if (!node) {
+      let newNode = new Node(key, value)
+      this.cache.set(key, newNode)
+      this.dll.addToHead(newNode)
+      ++this.count
+      if (this.count > this.capacity) {
+        let tail = this.dll.popTail()
+        this.cache.delete(tail.key)
+        --this.count
+      }
+    } else {
+      node.value = value
+      this.dll.moveToHead(node)
+    }
+  }
+}
+// Runtime: 192 ms, faster than 69.30% of JavaScript online submissions for LRU Cache.
+// Memory Usage: 51.7 MB, less than 31.70% of JavaScript online submissions for LRU Cache.
+
+
+// 4) Map
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity
+    this.cache = new Map()
+  }
+  get(key) {
+    if (!this.cache.has(key)) {
+      return -1  
+    }
+    const value = this.cache.get(key)
+    this.cache.delete(key)
+    this.cache.set(key, value)
+    return this.cache.get(key)
+  }
+  put(key, value) {
+    if (this.cache.has(key)) {
+      this.cache.delete(key)
+    }
+    this.cache.set(key, value)
+    if (this.cache.size > this.capacity) {
+      this.cache.delete(this.cache.keys().next().value)
+    }
+  }
+}
+// Runtime: 192 ms, faster than 69.57% of JavaScript online submissions for LRU Cache.
+// Memory Usage: 50.8 MB, less than 82.45 % of JavaScript online submissions for LRU Cache.
