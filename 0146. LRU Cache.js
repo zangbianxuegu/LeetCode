@@ -222,3 +222,32 @@ class LRUCache {
 }
 // Runtime: 192 ms, faster than 69.30% of JavaScript online submissions for LRU Cache.
 // Memory Usage: 51.7 MB, less than 31.70% of JavaScript online submissions for LRU Cache.
+
+
+// 4) Map
+class LRUCache {
+  constructor(capacity) {
+    this.capacity = capacity
+    this.cache = new Map()
+  }
+  get(key) {
+    if (!this.cache.has(key)) {
+      return -1  
+    }
+    const value = this.cache.get(key)
+    this.cache.delete(key)
+    this.cache.set(key, value)
+    return this.cache.get(key)
+  }
+  put(key, value) {
+    if (this.cache.has(key)) {
+      this.cache.delete(key)
+    }
+    this.cache.set(key, value)
+    if (this.cache.size > this.capacity) {
+      this.cache.delete(this.cache.keys().next().value)
+    }
+  }
+}
+// Runtime: 192 ms, faster than 69.57% of JavaScript online submissions for LRU Cache.
+// Memory Usage: 50.8 MB, less than 82.45 % of JavaScript online submissions for LRU Cache.
